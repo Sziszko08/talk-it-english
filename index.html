@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Talk It! Beszélgess amerikai angolul</title>
+<meta name="description" content="AI beszélgetőpartner magyar angoltanulóknak (A1, A2, B1).">
+<meta name="theme-color" content="#4f6df5">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Ugrás a tartalomra</a>
+<header class="top">
+  <div class="brand" role="button" tabindex="0" id="homeBtn"><span class="logo">💬</span><div><b>Talk It!</b><small>Beszélgess amerikai angolul</small></div></div>
+  <div class="top-actions">
+    <span class="pill" id="streak" title="Napi sorozat">🔥 0</span>
+    <span class="pill mode" id="modePill" title="Mód">Demo</span>
+    <button class="icon-btn" id="themeBtn" aria-label="Sötét/világos mód">🌓</button>
+    <button class="icon-btn" id="settingsBtn" aria-label="Beállítások">⚙️</button>
+  </div>
+</header>
+<div id="banner" class="banner" hidden></div>
+<main id="main" tabindex="-1"></main>
+<dialog id="settings">
+  <form method="dialog" class="settings" id="settingsForm">
+    <h2>Beállítások</h2>
+    <h3>🤖 AI szolgáltató</h3>
+    <p class="small muted">Saját API kulcsot használsz. A kulcs <b>csak ebben a böngészőben</b> tárolódik (localStorage), sehová máshová nem kerül, csak közvetlenül a választott szolgáltatóhoz megy a kérésekkel. Kulcs nélkül a Demo mód működik.</p>
+    <label>Szolgáltató<select id="provSel"><option value="xai">xAI (Grok)</option><option value="openai">OpenAI</option><option value="custom">Egyéni (OpenAI-kompatibilis)</option></select></label>
+    <label>Végpont (base URL)<input id="baseIn" type="url" placeholder="https://api.x.ai/v1" autocomplete="off" spellcheck="false"></label>
+    <label>Modell<input id="modelIn" list="modelList" autocomplete="off" spellcheck="false"><datalist id="modelList"></datalist></label>
+    <label>API kulcs<span class="keyrow"><input id="keyIn" type="password" placeholder="xai-... vagy sk-..." autocomplete="off" spellcheck="false"><button type="button" class="btn ghost sm" id="keyShow" aria-label="Kulcs mutatása">👁</button></span></label>
+    <div class="row"><button type="button" class="btn ghost" id="testKey">🔌 Kapcsolat tesztelése</button><button type="button" class="btn ghost" id="clearKey">🗑️ Kulcs törlése</button></div>
+    <div id="keyStatus" class="small" aria-live="polite"></div>
+    <p class="small muted">🔒 Adatvédelem: a beszélgetés szövege (a felismert mondataid is) a választott AI szolgáltatóhoz kerül feldolgozásra. A hangod nem, csak a szöveg. A beszédfelismerést a böngésződ végzi (Chrome esetén a Google szerverein).</p>
+    <hr>
+    <h3>🔊 Hang</h3>
+    <label>Hang (en-US)<select id="voiceSel"></select></label>
+    <label>Sebesség<select id="rateSel"><option value="1">Normál</option><option value="0.85">Kicsit lassabb</option><option value="0.7">Lassú</option><option value="0.55">Nagyon lassú</option></select></label>
+    <label class="chk"><input type="checkbox" id="handsFree"> Kihangosított mód: a tutor válasza után automatikusan figyel</label>
+    <label class="chk"><input type="checkbox" id="autoHu"> Magyar fordítás mindig látszik</label>
+    <button type="button" class="btn ghost" id="testVoice">🔊 Hang kipróbálása</button>
+    <hr>
+    <h3>📊 Adatok</h3>
+    <div class="row">
+      <button type="button" class="btn ghost" id="exportBtn">⬇️ Exportálás</button>
+      <label class="btn ghost">⬆️ Importálás<input type="file" id="importFile" accept="application/json" hidden></label>
+      <button type="button" class="btn danger" id="resetBtn">🗑️ Haladás nullázása</button>
+    </div>
+    <p class="small muted">Kiejtés gyakorlás szavanként: <a href="https://sziszko08.github.io/say-it-english/" target="_blank" rel="noopener">Say It! app</a></p>
+    <div class="row end"><button class="btn primary" value="close" id="settingsDone">Kész</button></div>
+  </form>
+</dialog>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
